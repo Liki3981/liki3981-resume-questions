@@ -1,5 +1,3 @@
-altair
-numpy
-pandas
-pydeck
+wordninja
+google-generativeai
 streamlit
