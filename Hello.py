@@ -59,6 +59,12 @@ for message in st.session_state.messages:
 
 # Process and store Query and Response
 def llm_function(query):
+    st.session_state.messages.append(
+            {
+                "role":"user",
+                "content": query
+            }
+        )
     size = len(st.session_state.messages)
     if size <12:      #   The number of Q/A after which the analysis or report is given 12/2 = 6
         if size == 1:
@@ -88,12 +94,6 @@ def llm_function(query):
 
 
         # Storing the User Message
-        st.session_state.messages.append(
-            {
-                "role":"user",
-                "content": query
-            }
-        )
         data.append({"role": "model","parts": result})
         # Storing the User Message
         st.session_state.messages.append(
@@ -116,15 +116,6 @@ f"Here is an exchange between interviewer and candidate. Based on his question a
                 st.markdown(response.text)
 
         data.append({"role": "user","parts": query})
-
-
-            # Storing the User Message
-        st.session_state.messages.append(
-            {
-                "role":"user",
-                "content": query
-            }
-        )
 
         data.append({"role": "model","parts": response})
         # Storing the User Message
