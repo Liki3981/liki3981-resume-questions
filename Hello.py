@@ -66,7 +66,7 @@ def llm_function(query):
             }
         )
     size = len(st.session_state.messages)
-    if size <12:      #   The number of Q/A after which the analysis or report is given 12/2 = 6
+    if size <20:      #   The number of Q/A after which the analysis or report is given 20/2 = 10
         if size == 1:
             query = f"""You are an interviewer for an MBA college admission panel. Here is the information of the candidate:
             {query}
