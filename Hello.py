@@ -59,14 +59,15 @@ for message in st.session_state.messages:
 
 # Process and store Query and Response
 def llm_function(query):
-    st.session_state.messages.append(
+    
+    size = len(st.session_state.messages)
+    if size <20: 
+        st.session_state.messages.append(
             {
                 "role":"user",
                 "content": query
             }
-        )
-    size = len(st.session_state.messages)
-    if size <20:      #   The number of Q/A after which the analysis or report is given 20/2 = 10
+        )     #   The number of Q/A after which the analysis or report is given 20/2 = 10
         if size == 1:
             query = f"""You are an interviewer for an MBA college admission panel. Here is the information of the candidate:
             {query}
@@ -103,6 +104,12 @@ def llm_function(query):
             }
         )
     else:
+        st.session_state.messages.append(
+            {
+                "role":"user",
+                "content": query
+            }
+        )
         message = ''
         for i in range(1,len(data)):
             now = data[i]['parts'] + '\n'
